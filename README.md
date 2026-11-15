@@ -5,9 +5,3 @@ Created by [msoloho](https://github.com/msoloho/), [BoltyPlays](https://github.c
 
 ## The Vision
 It is a cooking game in which all elements of it are bouncy! If you drop something, you're COOKED (heh, get it, like cooking...). No but actually, it will bounce in the kitchen, and become really chaotic fr.
-
-## 3D Models
-We went with low-poly models for our game. These were designed in Blockbench.
-
-![Tomato Low-Poly 3D Model](readme-imgs/tomato-model-img.png)
-![Cheese Low-Poly 3D Model](readme-imgs/cheese-model-img.png)
