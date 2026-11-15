@@ -1,0 +1,347 @@
+[gd_scene format=3 uid="uid://cbiqe1p6lue44"]
+
+[ext_resource type="Script" uid="uid://b8drky6q5slo6" path="res://player.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://d0y1t8lo223o6" path="res://assets/3D models/Chef-hands.gltf" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://cakpts84eeq5l" path="res://tomato.gd" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://c2r68lo3gh80s" path="res://assets/3D models/tomato.gltf" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://b7lr1fr7ekh7v" path="res://dough.gd" id="5_dg77c"]
+[ext_resource type="PackedScene" uid="uid://64dt43lslk83" path="res://assets/3D models/dough.gltf" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dcq0b4u715gsw" path="res://assets/3D models/cheese.gltf" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://di1fhof2lng3s" path="res://assets/3D models/Stovetop.gltf" id="7_272bh"]
+[ext_resource type="Script" uid="uid://ct8uot8u3okmf" path="res://cheese.gd" id="7_ycdy4"]
+[ext_resource type="Script" uid="uid://iq8y7w7xalhe" path="res://stovetop.gd" id="8_4c57u"]
+[ext_resource type="Texture2D" uid="uid://yrchverjef7r" path="res://assets/textures/crosshair.png" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://cgc8paiyh01el" path="res://assets/textures/roomba.gltf" id="9_kek77"]
+[ext_resource type="Script" uid="uid://d4e1ticxb16vq" path="res://roomba.gd" id="9_yaehf"]
+[ext_resource type="Script" uid="uid://orqa2ik7d6bh" path="res://pizza.gd" id="10_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://duf7l2xiflbav" path="res://assets/3D models/pizza.gltf" id="10_w48qg"]
+[ext_resource type="Script" path="res://assets/3D models/pizza.gd" id="11_vivmo"]
+[ext_resource type="PackedScene" uid="uid://c3ykog66lgt01" path="res://assets/3D models/ActiveStovetop.gltf" id="11_ycdy4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7mycd"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_qu58w"]
+size = Vector3(37.48723, 0.5, 29.628784)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
+size = Vector3(36.77002, 0.5, 29.647705)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4c57u"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+blend_mode = 2
+depth_test = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lxt76"]
+height = 3.3115234
+
+[sub_resource type="BoxMesh" id="BoxMesh_if2el"]
+size = Vector3(0.6485596, 21.101318, 36.613586)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lxt76"]
+size = Vector3(0.6505127, 10.007263, 29.147217)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_if2el"]
+size = Vector3(36.612488, 21.006836, 0.45458984)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ifht"]
+size = Vector3(0.6777344, 21.705933, 29.436615)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i1ea1"]
+size = Vector3(36.772247, 21.45105, 0.829834)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1bvp3"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lxt76"]
+radius = 0.54373664
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3ifht"]
+radius = 0.32529467
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cp0eq"]
+height = 0.13452148
+radius = 0.46191406
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8b0g1"]
+size = Vector3(0.9972534, 1.265564, 0.92668915)
+
+[node name="Main" type="Node3D" unique_id=1000941574]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1570866742]
+transform = Transform3D(0.99590564, -0.06019835, 0.06743834, 0.057935946, 0.997706, 0.03501771, -0.069391616, -0.030967224, 0.9971087, 0, 2.3580022, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=684402048]
+environment = SubResource("Environment_h2yge")
+
+[node name="FLOOR" type="StaticBody3D" parent="." unique_id=812421201]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+physics_material_override = SubResource("PhysicsMaterial_7mycd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FLOOR" unique_id=1673982379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17791748, 0.07249415, -0.18620062)
+mesh = SubResource("BoxMesh_qu58w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FLOOR" unique_id=859566245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08325195, 5.7631993, -0.111450195)
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="Ceiling" type="StaticBody3D" parent="." unique_id=1163009186]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ceiling" unique_id=2138474988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21455812, 5.856447, -0.18904042)
+mesh = SubResource("BoxMesh_qu58w")
+surface_material_override/0 = SubResource("StandardMaterial3D_4c57u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ceiling" unique_id=14732448]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08325195, 0.25, -0.111450195)
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=312491071]
+script = ExtResource("1_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=2086473628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9431448, 0)
+shape = SubResource("CapsuleShape3D_lxt76")
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1001712635]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7411985, 0)
+
+[node name="gloves" parent="Player/Camera3D" unique_id=1342533134 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008209467, -0.48734665, -0.38752273)
+
+[node name="Light" type="SpotLight3D" parent="." unique_id=1455459144]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 17.82075, -4.3674726)
+light_energy = 16.0
+distance_fade_enabled = true
+distance_fade_begin = 4096.0
+spot_range = 100.0
+metadata/_edit_group_ = true
+
+[node name="Light4" type="SpotLight3D" parent="." unique_id=1114805100]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 17.82075, 4.406396)
+light_energy = 16.0
+distance_fade_enabled = true
+distance_fade_begin = 4096.0
+spot_range = 100.0
+metadata/_edit_group_ = true
+
+[node name="Light2" type="SpotLight3D" parent="." unique_id=561833225]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 10.335958, 17.82075, -4.3674726)
+light_energy = 16.0
+distance_fade_enabled = true
+distance_fade_begin = 4096.0
+spot_range = 100.0
+metadata/_edit_group_ = true
+
+[node name="Light6" type="SpotLight3D" parent="." unique_id=730791626]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 10.335958, 17.82075, 4.8091955)
+light_energy = 16.0
+distance_fade_enabled = true
+distance_fade_begin = 4096.0
+spot_range = 100.0
+metadata/_edit_group_ = true
+
+[node name="Light3" type="SpotLight3D" parent="." unique_id=1934215950]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -12.610717, 17.82075, -4.3674726)
+light_energy = 16.0
+distance_fade_enabled = true
+distance_fade_begin = 4096.0
+spot_range = 100.0
+metadata/_edit_group_ = true
+
+[node name="Light5" type="SpotLight3D" parent="." unique_id=1464834216]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -12.610717, 17.82075, 4.4390497)
+light_energy = 16.0
+distance_fade_enabled = true
+distance_fade_begin = 4096.0
+spot_range = 100.0
+metadata/_edit_group_ = true
+
+[node name="Wall" type="StaticBody3D" parent="." unique_id=1737873007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.153984, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall" unique_id=150685891]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.595772, 6.4599895, -0.15470028)
+mesh = SubResource("BoxMesh_if2el")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall" unique_id=1482924300]
+transform = Transform3D(0.9999847, 0, 0.0055298265, 0, 1, 0, -0.0055298265, 0, 0.9999847, -18.615015, 0.34964752, -0.70422316)
+shape = SubResource("BoxShape3D_lxt76")
+
+[node name="Wall2" type="StaticBody3D" parent="." unique_id=291227165]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.153984, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Wall2" unique_id=1855365649]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.48191357, 6.464487, -14.69807)
+mesh = SubResource("BoxMesh_if2el")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2" unique_id=41313036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36935425, 6.5425873, -14.727189)
+shape = SubResource("BoxShape3D_if2el")
+
+[node name="Wall3" type="StaticBody3D" parent="." unique_id=2127348692]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.153984, 0)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Wall3" unique_id=1308728249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.211967, 6.4622383, -0.20686054)
+mesh = SubResource("BoxMesh_if2el")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3" unique_id=2031186117]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.21129, 6.1989822, -0.16108704)
+shape = SubResource("BoxShape3D_3ifht")
+
+[node name="Wall4" type="StaticBody3D" parent="." unique_id=672005507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.153984, 0)
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Wall4" unique_id=1483668243]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.48191357, 6.464487, 14.197591)
+mesh = SubResource("BoxMesh_if2el")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall4" unique_id=476574789]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30241394, 6.436385, 14.278954)
+shape = SubResource("BoxShape3D_i1ea1")
+
+[node name="Tomato" type="RigidBody3D" parent="." unique_id=1141108055]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.116027, 1.6213737, -7.677516)
+mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_1bvp3")
+contact_monitor = true
+max_contacts_reported = 2
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("3_1bvp3")
+metadata/draggable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tomato" unique_id=1013695417]
+transform = Transform3D(1, 0, 0, 0, 0.7, 0, 0, 0, 1, -0.020720005, 0.28872085, 0)
+shape = SubResource("SphereShape3D_lxt76")
+
+[node name="tomato" parent="Tomato" unique_id=1066163281 instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28976607, 0)
+
+[node name="Dough" type="RigidBody3D" parent="." unique_id=330304791]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7778397, 3.1570678, 3.5679698)
+mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_1bvp3")
+contact_monitor = true
+max_contacts_reported = 2
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("5_dg77c")
+metadata/draggable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dough" unique_id=1763703518]
+transform = Transform3D(1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0.01157403, 0.21712208, 0.06422377)
+shape = SubResource("SphereShape3D_lxt76")
+
+[node name="dough" parent="Dough" unique_id=1350027880 instance=ExtResource("5_lquwl")]
+
+[node name="Cheese" type="RigidBody3D" parent="." unique_id=770695485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8194447, 1.6213737, -4.698153)
+mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_1bvp3")
+contact_monitor = true
+max_contacts_reported = 2
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("7_ycdy4")
+metadata/draggable = true
+
+[node name="cheese" parent="Cheese" unique_id=755400895 instance=ExtResource("6_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.016785145)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cheese" unique_id=1197485841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0054905415, 0.13669181, -0.13628197)
+shape = SubResource("SphereShape3D_3ifht")
+
+[node name="Roomba" type="RigidBody3D" parent="." unique_id=353318549 groups=["pizza"]]
+transform = Transform3D(0.86016405, 0, -0.51001745, 0, 1, 0, 0.51001745, 0, 0.86016405, 2.1495943, 3.2427473, 17.684319)
+mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_1bvp3")
+contact_monitor = true
+max_contacts_reported = 2
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("9_yaehf")
+metadata/draggable = true
+
+[node name="Roomba" parent="Roomba" unique_id=1690527650 instance=ExtResource("9_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14106941, -0.7584064, -8.549857)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Roomba" unique_id=1381531060]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14106941, -0.70107937, -8.549857)
+shape = SubResource("CylinderShape3D_cp0eq")
+
+[node name="Pizza" type="RigidBody3D" parent="." unique_id=872222866]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.562109, 3.2427473, 9.229825)
+mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_1bvp3")
+contact_monitor = true
+max_contacts_reported = 8
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("10_2cqfq")
+metadata/draggable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pizza" unique_id=510616953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2986412, 0.565289, -7.266079)
+shape = SubResource("CylinderShape3D_cp0eq")
+
+[node name="Pizza" parent="Pizza" unique_id=64333968 instance=ExtResource("10_w48qg")]
+visible = false
+script = ExtResource("11_vivmo")
+
+[node name="Stovetop" type="StaticBody3D" parent="." unique_id=350102538 groups=["target"]]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 5.6228867, 0.058793426, 12.010496)
+script = ExtResource("8_4c57u")
+new_gltf_scene = ExtResource("11_ycdy4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stovetop" unique_id=1541813515]
+transform = Transform3D(2.1565359, 0, 0, 0, 1.9971879, 0, 0, 0, 1.9971879, -0.42616606, 0.9034401, -0.9247236)
+shape = SubResource("BoxShape3D_8b0g1")
+
+[node name="ModelHolder" type="Node3D" parent="Stovetop" unique_id=1243851459]
+
+[node name="stovetop" parent="Stovetop/ModelHolder" unique_id=526140628 instance=ExtResource("7_272bh")]
+transform = Transform3D(-0.36399993, 0, -2.9247852e-08, 0, 0.38880002, 0, 3.1821887e-08, 0, -0.33455646, 0.01843071, 0.025417686, -0.5088606)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=896517842]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=1428317345]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer" unique_id=1655248905]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("8_5vw27")
+expand_mode = 1
+
+[connection signal="body_entered" from="Tomato" to="Tomato" method="_on_body_entered"]
+[connection signal="body_entered" from="Dough" to="Dough" method="_on_body_entered"]
+[connection signal="body_entered" from="Cheese" to="Player" method="_on_cheese_body_entered"]
+[connection signal="body_entered" from="Cheese" to="Cheese" method="_on_body_entered"]
+[connection signal="body_entered" from="Roomba" to="Roomba" method="_on_body_entered"]
+[connection signal="body_entered" from="Pizza" to="Pizza" method="_on_body_entered"]

@@ -15,7 +15,6 @@
 [ext_resource type="Script" uid="uid://d4e1ticxb16vq" path="res://roomba.gd" id="9_yaehf"]
 [ext_resource type="Script" uid="uid://orqa2ik7d6bh" path="res://pizza.gd" id="10_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://duf7l2xiflbav" path="res://assets/3D models/pizza.gltf" id="10_w48qg"]
-[ext_resource type="Script" path="res://assets/3D models/pizza.gd" id="11_vivmo"]
 [ext_resource type="PackedScene" uid="uid://c3ykog66lgt01" path="res://assets/3D models/ActiveStovetop.gltf" id="11_ycdy4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
@@ -307,7 +306,6 @@ shape = SubResource("CylinderShape3D_cp0eq")
 
 [node name="Pizza" parent="Pizza" unique_id=64333968 instance=ExtResource("10_w48qg")]
 visible = false
-script = ExtResource("11_vivmo")
 
 [node name="Stovetop" type="StaticBody3D" parent="." unique_id=350102538 groups=["target"]]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 5.6228867, 0.058793426, 12.010496)
