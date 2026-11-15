@@ -49,10 +49,14 @@ size = Vector3(36.77002, 0.5, 29.647705)
 height = 3.3115234
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
+transparency = 2
+alpha_scissor_threshold = 1.0
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.3
 albedo_color = Color(1, 1, 0.8117647, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_if2el"]
-size = Vector3(0.6485596, 21.101318, 36.613586)
+size = Vector3(0.6485596, 21.529297, 36.613586)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lxt76"]
 size = Vector3(0.6505127, 10.007263, 29.147217)
@@ -91,6 +95,8 @@ radius = 0.46191406
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8b0g1"]
 size = Vector3(0.9972534, 1.265564, 0.92668915)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cp0eq"]
 
 [node name="Main" type="Node3D" unique_id=1000941574]
 
@@ -236,7 +242,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30241394, 6.436385, 14.278
 shape = SubResource("BoxShape3D_i1ea1")
 
 [node name="Tomato" type="RigidBody3D" parent="." unique_id=1141108055 groups=["pickupable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.116027, 1.6213737, -7.677516)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.015104, 1.6213737, -7.677516)
 collision_layer = 3
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_1bvp3")
@@ -292,7 +298,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0054905415, 0.13669181, -0
 shape = SubResource("SphereShape3D_3ifht")
 
 [node name="Roomba" type="RigidBody3D" parent="." unique_id=353318549 groups=["pizza"]]
-transform = Transform3D(0.86016405, 0, -0.51001745, 0, 1, 0, 0.51001745, 0, 0.86016405, 2.1495943, 3.2427473, 17.684319)
+transform = Transform3D(0.86016405, 0, -0.51001745, 0, 1, 0, 0.51001745, 0, 0.86016405, 0.9402883, 3.2427473, 17.427553)
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_1bvp3")
 contact_monitor = true
@@ -322,10 +328,10 @@ script = ExtResource("10_2cqfq")
 metadata/draggable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pizza" unique_id=510616953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009534836, 0.5093777, -0.005955696)
 shape = SubResource("CylinderShape3D_cp0eq")
 
 [node name="Pizza" parent="Pizza" unique_id=64333968 instance=ExtResource("10_w48qg")]
-visible = false
 
 [node name="Stovetop" type="StaticBody3D" parent="." unique_id=350102538 groups=["target"]]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 5.6228867, 0.058793426, 12.010496)
@@ -358,9 +364,14 @@ texture = ExtResource("8_5vw27")
 expand_mode = 1
 
 [node name="CustomerSpawn" type="Marker3D" parent="." unique_id=287782077]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 8.474684)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.347752, 1.4249947, 8.474684)
 script = ExtResource("18_074og")
 customer_scene = ExtResource("19_cegan")
+
+[node name="Area3D" type="Area3D" parent="CustomerSpawn" unique_id=1977358522]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CustomerSpawn/Area3D" unique_id=209224893]
+shape = SubResource("CapsuleShape3D_cp0eq")
 
 [connection signal="body_entered" from="Tomato" to="Tomato" method="_on_body_entered"]
 [connection signal="body_entered" from="Dough" to="Dough" method="_on_body_entered"]

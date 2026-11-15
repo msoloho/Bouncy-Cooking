@@ -33,7 +33,7 @@ func spawn_customer() -> void:
 		return
 
 	# Add her to the kitchen.
-	get_parent().add_child(customer)
+	get_parent().add_child.call_deferred(customer)
 
 	# Move her to the spawn point.
 	customer.global_transform = global_transform
