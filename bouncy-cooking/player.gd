@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 const SPEED = 7.0
 const JUMP_VELOCITY = 4.5
+const PUSH_FORCE = 0.05
 
 var look_dir: Vector2
 @onready var camera = $Camera3D
@@ -39,7 +40,15 @@ func _physics_process(delta: float) -> void:
 		
 	_camera_rotate(delta)
 	move_and_slide()
-
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider is RigidBody3D:
+			var push_dir = -collision.get_normal()
+			push_dir.y = max(push_dir.y, 0.5)
+			collider.apply_central_impulse(push_dir.normalized() * PUSH_FORCE / 5)
+	
 func _input(event: InputEvent):
 	if event is InputEventMouseMotion: look_dir = event.relative * 0.01
 
