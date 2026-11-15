@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cbiqe1p6lue44"]
 
 [ext_resource type="Script" uid="uid://b8drky6q5slo6" path="res://player.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://d0y1t8lo223o6" path="res://assets/textures/Chef-hands.gltf" id="2_0xm2m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -24,10 +25,13 @@ height = 2.0214844
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lxt76"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_nna7l"]
+size = Vector3(12, 4, 0.3)
+
 [node name="Main" type="Node3D" unique_id=1000941574]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1570866742]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.04330127, -0.02165064, 0.012499998, 0, 0.024999995, 0.043301277, -0.025000004, 0.037500005, -0.021650631, 0, -0.4, -0.7)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=684402048]
@@ -49,6 +53,7 @@ script = ExtResource("1_ig7tw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1834039689]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.023402333, 1.3753815, 0.010346413)
+visible = false
 mesh = SubResource("CapsuleMesh_lxt76")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=2086473628]
@@ -58,7 +63,26 @@ shape = SubResource("CapsuleShape3D_lxt76")
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=1001712635]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7411985, 0)
 
+[node name="blockbench_export" parent="Player/Camera3D" unique_id=1004535 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 0.87630665, 0.4817537, 0, -0.4817537, 0.87630665, 0, -0.4, -0.7)
+
+[node name="right arm" parent="Player/Camera3D/blockbench_export" index="0" unique_id=1453878036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0, 0.188)
+
+[node name="left arm" parent="Player/Camera3D/blockbench_export" index="1" unique_id=299056483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0.188)
+
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1455459144]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.387156, 0)
 light_energy = 9.396
 spot_range = 100.0
+
+[node name="KitchenWalls" type="Node3D" parent="." unique_id=2062547878]
+
+[node name="BackWall" type="StaticBody3D" parent="KitchenWalls" unique_id=1514199443]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="KitchenWalls/BackWall" unique_id=928931129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.844031)
+mesh = SubResource("BoxMesh_nna7l")
+
+[editable path="Player/Camera3D/blockbench_export"]
