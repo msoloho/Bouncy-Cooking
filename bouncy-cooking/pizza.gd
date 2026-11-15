@@ -21,7 +21,6 @@ func deactivate() -> void:
 
 	print("PIZZA INACTIVE - Waiting for ingredients")
 
-
 func activate() -> void:
 	# Show the finished pizza.
 	visible = true

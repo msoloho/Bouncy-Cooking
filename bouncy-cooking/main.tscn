@@ -17,8 +17,11 @@
 [ext_resource type="Script" uid="uid://orqa2ik7d6bh" path="res://pizza.gd" id="10_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://duf7l2xiflbav" path="res://assets/3D models/pizza.gltf" id="10_w48qg"]
 [ext_resource type="PackedScene" uid="uid://c3ykog66lgt01" path="res://assets/3D models/ActiveStovetop.gltf" id="11_ycdy4"]
+[ext_resource type="AudioStream" uid="uid://csfnv7mheplck" path="res://assets/cat-laughing-at-you.mp3" id="12_ryguw"]
 [ext_resource type="Script" uid="uid://dpbcukumy3raj" path="res://customer_spawn.gd" id="18_074og"]
 [ext_resource type="PackedScene" uid="uid://cpd04kbv6c4e1" path="res://assets/textures/selena.gltf" id="19_cegan"]
+[ext_resource type="Script" uid="uid://cqlom10s0sdl2" path="res://customer.gd" id="20_82xsv"]
+[ext_resource type="AudioStream" uid="uid://c4wpog3amxuof" path="res://assets/yippie.mp3" id="21_getpj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -261,7 +264,7 @@ shape = SubResource("SphereShape3D_lxt76")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28976607, 0)
 
 [node name="Dough" type="RigidBody3D" parent="." unique_id=330304791 groups=["pickupable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7778397, 3.1570678, 3.5679698)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2792015, 3.1570678, 3.5679698)
 collision_layer = 3
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_1bvp3")
@@ -297,7 +300,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.016785145)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0054905415, 0.13669181, -0.13628197)
 shape = SubResource("SphereShape3D_3ifht")
 
-[node name="Roomba" type="RigidBody3D" parent="." unique_id=353318549 groups=["pizza"]]
+[node name="Roomba" type="RigidBody3D" parent="." unique_id=353318549]
 transform = Transform3D(0.86016405, 0, -0.51001745, 0, 1, 0, 0.51001745, 0, 0.86016405, 0.9402883, 3.2427473, 17.427553)
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_1bvp3")
@@ -314,6 +317,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14106941, -0.7584064, -8.5
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Roomba" unique_id=1381531060]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14106941, -0.70107937, -8.549857)
 shape = SubResource("CylinderShape3D_cp0eq")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Roomba" unique_id=728017963]
+transform = Transform3D(0.86016405, 0, 0.51001745, 0, 1, 0, -0.51001745, 0, 0.86016405, -7.1618505, -1.4846818, -21.634617)
+stream = ExtResource("12_ryguw")
 
 [node name="Pizza" type="RigidBody3D" parent="." unique_id=872222866 groups=["pickupable", "pizza"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.562109, 3.2427473, 9.229825)
@@ -369,6 +376,11 @@ script = ExtResource("18_074og")
 customer_scene = ExtResource("19_cegan")
 
 [node name="Area3D" type="Area3D" parent="CustomerSpawn" unique_id=1977358522]
+script = ExtResource("20_82xsv")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CustomerSpawn/Area3D" unique_id=113245382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.347752, -1.4249947, -8.474684)
+stream = ExtResource("21_getpj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CustomerSpawn/Area3D" unique_id=209224893]
 shape = SubResource("CapsuleShape3D_cp0eq")
