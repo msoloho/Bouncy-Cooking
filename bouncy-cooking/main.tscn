@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d0y1t8lo223o6" path="res://assets/3D models/Chef-hands.gltf" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://cakpts84eeq5l" path="res://tomato.gd" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://c2r68lo3gh80s" path="res://assets/3D models/tomato.gltf" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://cicpvvgko2yff" path="res://pickup_ray.gd" id="3_yaehf"]
 [ext_resource type="Script" uid="uid://b7lr1fr7ekh7v" path="res://dough.gd" id="5_dg77c"]
 [ext_resource type="PackedScene" uid="uid://64dt43lslk83" path="res://assets/3D models/dough.gltf" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dcq0b4u715gsw" path="res://assets/3D models/cheese.gltf" id="6_7mycd"]
@@ -16,6 +17,8 @@
 [ext_resource type="Script" uid="uid://orqa2ik7d6bh" path="res://pizza.gd" id="10_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://duf7l2xiflbav" path="res://assets/3D models/pizza.gltf" id="10_w48qg"]
 [ext_resource type="PackedScene" uid="uid://c3ykog66lgt01" path="res://assets/3D models/ActiveStovetop.gltf" id="11_ycdy4"]
+[ext_resource type="Script" uid="uid://dpbcukumy3raj" path="res://customer_spawn.gd" id="18_074og"]
+[ext_resource type="PackedScene" uid="uid://cpd04kbv6c4e1" path="res://assets/textures/selena.gltf" id="19_cegan"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -32,21 +35,21 @@ sky = SubResource("Sky_0xm2m")
 friction = 0.0
 bounce = 1.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_074og"]
+albedo_color = Color(0.5581229, 0.38876936, 0.22814313, 1)
+metallic = 0.8
+
 [sub_resource type="BoxMesh" id="BoxMesh_qu58w"]
-size = Vector3(37.48723, 0.5, 29.628784)
+size = Vector3(30.373497, 0.5, 29.628784)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(36.77002, 0.5, 29.647705)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4c57u"]
-transparency = 2
-alpha_scissor_threshold = 0.5
-alpha_antialiasing_mode = 0
-blend_mode = 2
-depth_test = 1
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lxt76"]
 height = 3.3115234
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
+albedo_color = Color(1, 1, 0.8117647, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_if2el"]
 size = Vector3(0.6485596, 21.101318, 36.613586)
@@ -54,11 +57,20 @@ size = Vector3(0.6485596, 21.101318, 36.613586)
 [sub_resource type="BoxShape3D" id="BoxShape3D_lxt76"]
 size = Vector3(0.6505127, 10.007263, 29.147217)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82xsv"]
+albedo_color = Color(1, 1, 0.8117647, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_if2el"]
 size = Vector3(36.612488, 21.006836, 0.45458984)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryguw"]
+albedo_color = Color(1, 1, 0.8117647, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_3ifht"]
 size = Vector3(0.6777344, 21.705933, 29.436615)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_getpj"]
+albedo_color = Color(1, 1, 0.8117647, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i1ea1"]
 size = Vector3(36.772247, 21.45105, 0.829834)
@@ -94,7 +106,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 physics_material_override = SubResource("PhysicsMaterial_7mycd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FLOOR" unique_id=1673982379]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17791748, 0.07249415, -0.18620062)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.420731, 0.1795367, 1.940259)
+material_override = SubResource("StandardMaterial3D_074og")
 mesh = SubResource("BoxMesh_qu58w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FLOOR" unique_id=859566245]
@@ -103,11 +116,6 @@ shape = SubResource("BoxShape3D_7dm0k")
 
 [node name="Ceiling" type="StaticBody3D" parent="." unique_id=1163009186]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ceiling" unique_id=2138474988]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21455812, 5.856447, -0.18904042)
-mesh = SubResource("BoxMesh_qu58w")
-surface_material_override/0 = SubResource("StandardMaterial3D_4c57u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ceiling" unique_id=14732448]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08325195, 0.25, -0.111450195)
@@ -125,6 +133,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7411985, 0)
 
 [node name="gloves" parent="Player/Camera3D" unique_id=1342533134 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008209467, -0.48734665, -0.38752273)
+
+[node name="PickupRay" type="RayCast3D" parent="Player/Camera3D" unique_id=1805093749]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0)
+collision_mask = 2
+script = ExtResource("3_yaehf")
 
 [node name="Light" type="SpotLight3D" parent="." unique_id=1455459144]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 17.82075, -4.3674726)
@@ -178,7 +191,8 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.153984, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Wall" unique_id=150685891]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.595772, 6.4599895, -0.15470028)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.575115, 6.4599895, -0.15470028)
+material_override = SubResource("StandardMaterial3D_cegan")
 mesh = SubResource("BoxMesh_if2el")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall" unique_id=1482924300]
@@ -186,10 +200,11 @@ transform = Transform3D(0.9999847, 0, 0.0055298265, 0, 1, 0, -0.0055298265, 0, 0
 shape = SubResource("BoxShape3D_lxt76")
 
 [node name="Wall2" type="StaticBody3D" parent="." unique_id=291227165]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.153984, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.130636, 4.153984, 4.981141)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Wall2" unique_id=1855365649]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.48191357, 6.464487, -14.69807)
+material_override = SubResource("StandardMaterial3D_82xsv")
 mesh = SubResource("BoxMesh_if2el")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2" unique_id=41313036]
@@ -197,10 +212,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36935425, 6.5425873, -14.7
 shape = SubResource("BoxShape3D_if2el")
 
 [node name="Wall3" type="StaticBody3D" parent="." unique_id=2127348692]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.153984, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80242, 4.153984, 0)
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Wall3" unique_id=1308728249]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.211967, 6.4622383, -0.20686054)
+material_override = SubResource("StandardMaterial3D_ryguw")
 mesh = SubResource("BoxMesh_if2el")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3" unique_id=2031186117]
@@ -212,14 +228,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.153984, 0)
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Wall4" unique_id=1483668243]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.48191357, 6.464487, 14.197591)
+material_override = SubResource("StandardMaterial3D_getpj")
 mesh = SubResource("BoxMesh_if2el")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall4" unique_id=476574789]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30241394, 6.436385, 14.278954)
 shape = SubResource("BoxShape3D_i1ea1")
 
-[node name="Tomato" type="RigidBody3D" parent="." unique_id=1141108055]
+[node name="Tomato" type="RigidBody3D" parent="." unique_id=1141108055 groups=["pickupable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.116027, 1.6213737, -7.677516)
+collision_layer = 3
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_1bvp3")
 contact_monitor = true
@@ -230,14 +248,15 @@ script = ExtResource("3_1bvp3")
 metadata/draggable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tomato" unique_id=1013695417]
-transform = Transform3D(1, 0, 0, 0, 0.7, 0, 0, 0, 1, -0.020720005, 0.28872085, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020720005, 0.28872085, 0)
 shape = SubResource("SphereShape3D_lxt76")
 
 [node name="tomato" parent="Tomato" unique_id=1066163281 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28976607, 0)
 
-[node name="Dough" type="RigidBody3D" parent="." unique_id=330304791]
+[node name="Dough" type="RigidBody3D" parent="." unique_id=330304791 groups=["pickupable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7778397, 3.1570678, 3.5679698)
+collision_layer = 3
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_1bvp3")
 contact_monitor = true
@@ -248,13 +267,14 @@ script = ExtResource("5_dg77c")
 metadata/draggable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dough" unique_id=1763703518]
-transform = Transform3D(1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0.01157403, 0.21712208, 0.06422377)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01157403, 0.21712208, 0.06422377)
 shape = SubResource("SphereShape3D_lxt76")
 
 [node name="dough" parent="Dough" unique_id=1350027880 instance=ExtResource("5_lquwl")]
 
-[node name="Cheese" type="RigidBody3D" parent="." unique_id=770695485]
+[node name="Cheese" type="RigidBody3D" parent="." unique_id=770695485 groups=["pickupable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8194447, 1.6213737, -4.698153)
+collision_layer = 3
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_1bvp3")
 contact_monitor = true
@@ -289,8 +309,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14106941, -0.7584064, -8.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14106941, -0.70107937, -8.549857)
 shape = SubResource("CylinderShape3D_cp0eq")
 
-[node name="Pizza" type="RigidBody3D" parent="." unique_id=872222866]
+[node name="Pizza" type="RigidBody3D" parent="." unique_id=872222866 groups=["pickupable", "pizza"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.562109, 3.2427473, 9.229825)
+collision_layer = 3
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_1bvp3")
 contact_monitor = true
@@ -301,7 +322,6 @@ script = ExtResource("10_2cqfq")
 metadata/draggable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pizza" unique_id=510616953]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2986412, 0.565289, -7.266079)
 shape = SubResource("CylinderShape3D_cp0eq")
 
 [node name="Pizza" parent="Pizza" unique_id=64333968 instance=ExtResource("10_w48qg")]
@@ -336,6 +356,11 @@ layout_mode = 2
 offset_transform_enabled = true
 texture = ExtResource("8_5vw27")
 expand_mode = 1
+
+[node name="CustomerSpawn" type="Marker3D" parent="." unique_id=287782077]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 8.474684)
+script = ExtResource("18_074og")
+customer_scene = ExtResource("19_cegan")
 
 [connection signal="body_entered" from="Tomato" to="Tomato" method="_on_body_entered"]
 [connection signal="body_entered" from="Dough" to="Dough" method="_on_body_entered"]
