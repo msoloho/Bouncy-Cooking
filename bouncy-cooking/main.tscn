@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" uid="uid://b8drky6q5slo6" path="res://player.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://d0y1t8lo223o6" path="res://assets/3D models/Chef-hands.gltf" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://cakpts84eeq5l" path="res://tomato.gd" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://c2r68lo3gh80s" path="res://assets/3D models/tomato.gltf" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://64dt43lslk83" path="res://assets/3D models/dough.gltf" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dcq0b4u715gsw" path="res://assets/3D models/cheese.gltf" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://di1fhof2lng3s" path="res://assets/3D models/Stovetop.gltf" id="7_272bh"]
+[ext_resource type="Texture2D" uid="uid://yrchverjef7r" path="res://assets/textures/crosshair.png" id="8_5vw27"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -25,11 +30,8 @@ size = Vector3(37.48723, 0.5, 29.628784)
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(36.77002, 0.5, 29.647705)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_lxt76"]
-radius = 0.25
-height = 2.0214844
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lxt76"]
+height = 3.3115234
 
 [sub_resource type="BoxMesh" id="BoxMesh_if2el"]
 size = Vector3(0.6485596, 21.101318, 36.613586)
@@ -53,6 +55,12 @@ bounce = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_lxt76"]
 radius = 0.54373664
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_3ifht"]
+radius = 0.32529467
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8b0g1"]
+size = Vector3(0.9972534, 1.265564, 0.92668915)
+
 [node name="Main" type="Node3D" unique_id=1000941574]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1570866742]
@@ -71,7 +79,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17791748, 0.07249415, -0.1
 mesh = SubResource("BoxMesh_qu58w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FLOOR" unique_id=859566245]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08325195, 0.25, -0.111450195)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08325195, 5.7631993, -0.111450195)
 shape = SubResource("BoxShape3D_7dm0k")
 
 [node name="Ceiling" type="StaticBody3D" parent="." unique_id=1163009186]
@@ -88,12 +96,8 @@ shape = SubResource("BoxShape3D_7dm0k")
 [node name="Player" type="CharacterBody3D" parent="." unique_id=312491071]
 script = ExtResource("1_ig7tw")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1834039689]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.023402333, 1.3753815, 0.010346413)
-mesh = SubResource("CapsuleMesh_lxt76")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=2086473628]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2691028, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9431448, 0)
 shape = SubResource("CapsuleShape3D_lxt76")
 
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=1001712635]
@@ -194,16 +198,78 @@ mesh = SubResource("BoxMesh_if2el")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30241394, 6.436385, 14.278954)
 shape = SubResource("BoxShape3D_i1ea1")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1141108055]
+[node name="Tomato" type="RigidBody3D" parent="." unique_id=1141108055]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7810545, 1.6213737, 0)
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_1bvp3")
 linear_damp_mode = 1
 angular_damp_mode = 1
+script = ExtResource("3_1bvp3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1013695417]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tomato" unique_id=1013695417]
 transform = Transform3D(1, 0, 0, 0, 0.7, 0, 0, 0, 1, -0.020720005, 0.28872085, 0)
 shape = SubResource("SphereShape3D_lxt76")
 
-[node name="tomato" parent="RigidBody3D" unique_id=1066163281 instance=ExtResource("3_h2yge")]
+[node name="tomato" parent="Tomato" unique_id=1066163281 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28976607, 0)
+
+[node name="Dough" type="RigidBody3D" parent="." unique_id=330304791]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7810545, 1.6213737, 3.5679698)
+mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_1bvp3")
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("3_1bvp3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dough" unique_id=1763703518]
+transform = Transform3D(1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0.01157403, 0.21712208, 0.06422377)
+shape = SubResource("SphereShape3D_lxt76")
+
+[node name="dough" parent="Dough" unique_id=1350027880 instance=ExtResource("5_lquwl")]
+
+[node name="cheese" type="RigidBody3D" parent="." unique_id=770695485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7810545, 1.6213737, 5.484545)
+mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_1bvp3")
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("3_1bvp3")
+
+[node name="cheese" parent="cheese" unique_id=755400895 instance=ExtResource("6_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.016785145)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="cheese" unique_id=1197485841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0054905415, 0.13669181, -0.13628197)
+shape = SubResource("SphereShape3D_3ifht")
+
+[node name="Stovetop" type="StaticBody3D" parent="." unique_id=350102538]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.006603241, 0.058793426, 12.010496)
+
+[node name="stovetop" parent="Stovetop" unique_id=526140628 instance=ExtResource("7_272bh")]
+transform = Transform3D(-0.36399993, 0, -2.9247852e-08, 0, 0.38880002, 0, 3.1821887e-08, 0, -0.33455646, 0.01843082, 0.025417686, -0.5088606)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stovetop" unique_id=1541813515]
+transform = Transform3D(2.1565359, 0, 0, 0, 1.9971879, 0, 0, 0, 1.9971879, -0.42616612, 0.9034401, -0.9247236)
+shape = SubResource("BoxShape3D_8b0g1")
+
+[node name="Doughmaker" type="StaticBody3D" parent="." unique_id=1907109504]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3.245058, -0.012025833, -0.008513212)
+
+[node name="doughmaker" parent="Doughmaker" unique_id=1750970336 instance=ExtResource("7_272bh")]
+transform = Transform3D(0.36391917, -5.8613413e-08, -0.0070461035, 5.4429236e-08, 0.38880014, -1.9966354e-08, 0.0076662153, 2.1974053e-08, 0.33448222, -0.5841434, 0.045446992, -13.415393)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Doughmaker" unique_id=254065465]
+transform = Transform3D(1.9971879, 0, 0, 0, 1.9971879, 0, 0, 0, 1.9971879, -0.14749312, 0.90959597, -12.963295)
+shape = SubResource("BoxShape3D_8b0g1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=896517842]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=1428317345]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer" unique_id=1655248905]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("8_5vw27")
+expand_mode = 1
